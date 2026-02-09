@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Leela</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="background-orb orb-1"></div>
+    <div class="background-orb orb-2"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-feather-pointed"></i> <!-- Peacock feather vibe -->
+                <h1>Krishna Leela</h1>
+            </div>
+            <div class="header-controls">
+                <select id="language-select" title="Select Language">
+                    <option value="en">English</option>
+                    <option value="kn">Kannada (ಕನ್ನಡ)</option>
+                    <option value="ta">Tamil (தமிழ்)</option>
+                    <option value="te">Telugu (తెలుగు)</option>
+                </select>
+                <button id="settings-btn" title="API Key Settings"><i class="fa-solid fa-gear"></i></button>
+            </div>
+        </header>
+
+        <div id="api-key-modal" class="modal">
+            <div class="modal-content">
+                <h2>Setup API Key</h2>
+                <p>Please enter your Google Gemini API Key to start hearing divine stories.</p>
+                <input type="password" id="api-key-input" placeholder="AIza..." />
+                <button id="save-api-key">Save Key</button>
+                <p class="small-text">Your key is stored locally in your browser.</p>
+            </div>
+        </div>
+
+        <div class="chat-container" id="chat-container">
+            <div class="message bot-message">
+                <div class="message-content">
+                    Namaste! I am Krishna Leela. I am here to share the divine and enchanting stories of
+                    Lord Krishna. Ask me about his childhood in Vrindavan, his teachings in the Gita, or his playful
+                    leelas. How may I serve you today?
+                </div>
+            </div>
+        </div>
+
+        <div class="suggestion-chips-container" id="chips-container">
+            <!-- Chips will be added here via JS -->
+        </div>
+
+        <div class="input-area">
+            <div class="input-wrapper">
+                <textarea id="user-input" placeholder="Ask about Krishna's stories..." rows="1"></textarea>
+                <button id="mic-btn" title="Speak"><i class="fa-solid fa-microphone"></i></button>
+                <button id="send-btn" title="Send"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+list_models.py
+.DS_Store
