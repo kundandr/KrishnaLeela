@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const languageSelect = document.getElementById('language-select');
     const chipsContainer = document.getElementById('chips-container');
 
-    const DEFAULT_API_KEY = 'AIzaSyBobJef_tLD-Wk97tbVwTL7DFFfGEZ-MEI';
+    const DEFAULT_API_KEY = '';
     let apiKey = localStorage.getItem('krishna_leela_api_key') || DEFAULT_API_KEY;
     let currentLanguage = localStorage.getItem('krishna_leela_language') || 'en';
 

@@ -3,8 +3,14 @@ import urllib.request
 import urllib.error
 import sys
 
+import os
+
 # Configuration
-API_KEY = "AIzaSyBobJef_tLD-Wk97tbVwTL7DFFfGEZ-MEI"  # Using the key provided by user
+API_KEY = os.getenv("GEMINI_API_KEY")
+if not API_KEY:
+    print("API Key not found in environment variables.")
+    API_KEY = input("Please enter your Google Gemini API Key: ").strip()
+
 MODEL_NAME = "gemini-2.5-flash"
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL_NAME}:streamGenerateContent?alt=sse&key={API_KEY}"
 
