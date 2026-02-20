@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const fontDecrease = document.getElementById('font-decrease');
     const scrollBottomBtn = document.getElementById('scroll-bottom-btn');
 
-    const DEFAULT_API_KEY = ''; // Key is kept server-side in Vercel env vars
-    let apiKey = localStorage.getItem('krishna_leela_api_key') || DEFAULT_API_KEY;
+    const isLocalFile = window.location.protocol === 'file:';
+    let apiKey = localStorage.getItem('krishna_leela_api_key') || '';
     let currentLanguage = localStorage.getItem('krishna_leela_language') || 'en';
     let isDarkMode = localStorage.getItem('krishna_leela_dark') === 'true';
     let fontSize = parseInt(localStorage.getItem('krishna_leela_fontsize') || '16');
@@ -90,9 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
     languageSelect.value = currentLanguage;
     updateUI(currentLanguage);
 
-    if (!apiKey) {
+    if (isLocalFile && !apiKey) {
         apiKeyModal.style.display = 'flex';
-    } else {
+    } else if (apiKey) {
         apiKeyInput.value = apiKey;
     }
 
@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function handleSendMessage() {
         const message = userInput.value.trim();
         if (!message) return;
-        if (!apiKey) { apiKeyModal.style.display = 'flex'; return; }
+        if (isLocalFile && !apiKey) { apiKeyModal.style.display = 'flex'; return; }
 
         appendMessage('user', message);
         userInput.value = '';
