@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fontDecrease = document.getElementById('font-decrease');
     const scrollBottomBtn = document.getElementById('scroll-bottom-btn');
 
-    const DEFAULT_API_KEY = 'AIzaSyCt0iiHCv1QnWsbbQ_xFKvpWZldozpJh10';
+    const DEFAULT_API_KEY = ''; // Do NOT hardcode key here — users enter their own key
     let apiKey = localStorage.getItem('krishna_leela_api_key') || DEFAULT_API_KEY;
     let currentLanguage = localStorage.getItem('krishna_leela_language') || 'en';
     let isDarkMode = localStorage.getItem('krishna_leela_dark') === 'true';
