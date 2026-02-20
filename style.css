@@ -111,13 +111,41 @@ body.dark-mode .message-content strong {
 
 body {
     font-family: 'Lato', sans-serif;
-    background: radial-gradient(circle at top left, var(--bg-gradient-start), var(--bg-gradient-end), #fff7ed);
+    background-image: url('krishna-bg.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     color: var(--text-main);
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 251, 235, 0.72) 0%,
+            rgba(254, 243, 199, 0.65) 50%,
+            rgba(255, 237, 213, 0.72) 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+body.dark-mode::before {
+    background: linear-gradient(135deg,
+            rgba(28, 20, 16, 0.80) 0%,
+            rgba(45, 31, 14, 0.78) 50%,
+            rgba(26, 18, 8, 0.80) 100%);
+}
+
+.container {
+    position: relative;
+    z-index: 1;
 }
 
 /* Background Animation Elements - Softer/Lighter */
