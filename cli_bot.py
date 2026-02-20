@@ -32,8 +32,8 @@ def chat():
             if not user_input:
                 continue
             
-            if user_input.lower() in ('quit', 'exit'):
-                print("\nNamaste! Have a blessed day.")
+            if user_input.lower() in ('quit', 'exit', 'bye', 'goodbye', 'radhe radhe'):
+                print("\n🙏 RADHE RADHE! May Lord Krishna bless you always. Jai Shri Krishna! 🦚")
                 break
 
             # Add user message to history
@@ -88,7 +88,7 @@ def chat():
                 history.append({"role": "model", "parts": [{"text": full_response_text}]})
 
         except KeyboardInterrupt:
-            print("\nNamaste! Exiting...")
+            print("\n🙏 RADHE RADHE! Jai Shri Krishna! 🦚")
             break
         except Exception as e:
             print(f"\n[Unexpected Error] {e}")
