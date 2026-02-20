@@ -15,12 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const fontDecrease = document.getElementById('font-decrease');
     const scrollBottomBtn = document.getElementById('scroll-bottom-btn');
 
-    const DEFAULT_API_KEY = ''; // Do NOT hardcode key here — users enter their own key
+    const DEFAULT_API_KEY = ''; // Key is kept server-side in Vercel env vars
     let apiKey = localStorage.getItem('krishna_leela_api_key') || DEFAULT_API_KEY;
     let currentLanguage = localStorage.getItem('krishna_leela_language') || 'en';
     let isDarkMode = localStorage.getItem('krishna_leela_dark') === 'true';
     let fontSize = parseInt(localStorage.getItem('krishna_leela_fontsize') || '16');
     let ttsActive = null;
+
+    // Hide API key modal - not needed since key is server-side
+    if (apiKeyModal) apiKeyModal.style.display = 'none';
+    if (settingsBtn) settingsBtn.style.display = 'none';
 
     // Apply saved settings
     if (isDarkMode) {
@@ -485,16 +489,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== STREAM API =====
     async function streamChatCompletion(messages, messageId) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse&key=${apiKey}`;
+        // Use our secure server-side proxy instead of calling Gemini directly
+        const isLocal = window.location.protocol === 'file:';
+        const url = isLocal
+            ? `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?alt=sse&key=${apiKey}`
+            : '/api/chat';
+
         const systemInstruction = TRANSLATIONS[currentLanguage].systemPrompt +
             "\n\nSTRICT GUIDELINES: Only answer questions related to Krishna, Mahabharata, Bhagavad Gita. Refuse other topics politely.";
 
         const payload = { contents: messages, system_instruction: { parts: [{ text: systemInstruction }] } };
-        const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
 
         if (!response.ok) {
             let errorMsg = 'Unknown error';
-            try { const e = await response.json(); errorMsg = e.error.message || errorMsg; } catch (e) { }
+            try { const e = await response.json(); errorMsg = e.error?.message || errorMsg; } catch (e) { }
             throw new Error(errorMsg);
         }
 
